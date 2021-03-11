@@ -11,11 +11,13 @@ function App() {
       <Router>  
         <MainHeader />
 
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/object-detection" exact component={ObjectDetectionPage} />
-          <Route render={() => <h1>404: page not found</h1>} />
-        </Switch>
+        <div className="min-h-screen">
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/object-detection" exact component={ObjectDetectionPage} />
+            <Route render={() => <h1>404: page not found</h1>} />
+          </Switch>
+        </div>
       </Router>
 
       <MainFooter />
