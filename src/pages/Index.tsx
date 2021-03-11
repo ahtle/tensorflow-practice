@@ -1,4 +1,10 @@
-import Section from '../components/home/Section';
+import Section from '../components/Section';
+import ProjectCard from '../components/home/ProjectCard';
+
+
+const projects = [
+    {name: 'Object detection', description: 'Localize and identify objects from an image', path: '/object-detection', image: 'tf-object-detection-logo.png'}
+]
 
 const Home = () => {
     return (
@@ -9,8 +15,8 @@ const Home = () => {
                 class="bg-gray-600 text-white"
             >
                 <>
-                    <h1 className="text-center">Practice site for...</h1>
-                    <div className="grid md:grid-cols-2 gap-4 pt-10">
+                    <h1 className="text-center mb-10">Practice site for...</h1>
+                    <div className="grid md:grid-cols-2 gap-4">
                         <div id="react-wrapper" className="flex flex-col items-center mb-5 md:mb-0">
                             <h1 className="text-react-color text-bold mb-5">React</h1>
                             <p className="text-center">A JavaScript library for building user interfaces</p>
@@ -26,7 +32,23 @@ const Home = () => {
             {/* topics section */}
             <Section>
                 <>
-                    <h1 className="text-center">Mini projects:</h1>
+                    <h1 className="text-center mb-10">Mini projects:</h1>
+                    <div className="flex justify-center">
+                        
+                        {projects.map(p => {
+                            return (
+                                <ProjectCard 
+                                    key={p.name}
+                                    name={p.name}
+                                    description={p.name}
+                                    image={p.image}
+                                    path={p.path}
+                                />
+                            )
+                        })}
+
+
+                    </div>
                 </>
             </Section>
 
