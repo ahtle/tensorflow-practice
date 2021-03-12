@@ -24,7 +24,7 @@ const ObjectDetectionPage = () => {
     }
     
     const runModel = async () => {
-        if (model && canvasRef.current) {
+        if (model && canvasRef.current && videoRef.current.state.hasUserMedia) {
             const video = videoRef.current.video;
             const predictions = await model.detect(video);
             
@@ -41,7 +41,7 @@ const ObjectDetectionPage = () => {
         if (ctx) {
             ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
-            predictions.map(obj => {
+            predictions.forEach(obj => {
                 const text = obj['class']; 
                 const [x, y, width, height] = obj['bbox']; 
     
