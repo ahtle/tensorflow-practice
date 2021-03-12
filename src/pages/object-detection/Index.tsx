@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Section from '../../components/Section';
 import "@tensorflow/tfjs";
 import * as cocossd from '@tensorflow-models/coco-ssd';
@@ -10,7 +10,7 @@ const ObjectDetectionPage = () => {
     // local state
     const [loading, setLoading] = useState(false);
     const [imgUrl, setImgUrl] = useState('https://i.pinimg.com/originals/e0/3d/5b/e03d5b812b2734826f76960eca5b5541.jpg');
-    const [dropFile, setDropFile] = useState<any>()
+    const [dropFile, setDropFile] = useState<any>(null)
 
     const loadModel = async () => {
         setLoading(true);
@@ -20,6 +20,11 @@ const ObjectDetectionPage = () => {
 
         // const predictions = await model.detect(image);
         // console.log(predictions);
+    }
+
+    const onUrlInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setImgUrl(e.target.value);
+        setDropFile(null);
     }
 
     const onDrop = (files: Array<any>) => {
@@ -32,6 +37,16 @@ const ObjectDetectionPage = () => {
         // loadModel();
     }, []);
 
+    const renderPreviewImg = () => {
+        let src = null;
+        if (dropFile) {
+            src = dropFile.preview;
+        } else if (imgUrl !== '') {
+            src = imgUrl;
+        }
+        return src ? <img id="image" src={src} width="400" /> : <></>;
+    }
+
     return (
         <div id="ObjectDetectionPage">
             <Section>
@@ -41,7 +56,7 @@ const ObjectDetectionPage = () => {
                     <div className="flex flex-col items-center">
                         
                         <h2 className="text-tensorflow-color mb-2">Paste image URL</h2>
-                        <input className="border border-gray-200 px-4 py-2 rounded w-3/4 mb-6" type="text" value={imgUrl} onChange={(e) => setImgUrl(e.target.value)}
+                        <input className="border border-gray-200 px-4 py-2 rounded w-3/4 mb-6" type="text" value={imgUrl} onChange={onUrlInput}
                             placeholder="https://..."
                         />
 
@@ -50,8 +65,7 @@ const ObjectDetectionPage = () => {
                             <DropZone onDrop={onDrop}/>
                         </div>
 
-                        {dropFile && <img id="dropFile" src={dropFile.preview} width="400" />}
-                        {imgUrl !== '' && <img id="image" src={imgUrl} width="400" />}
+                        {renderPreviewImg()}
 
                     </div>
                 </div>
