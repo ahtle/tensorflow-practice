@@ -10,7 +10,7 @@ type Props = {
 
 const ProjectCard = (props: Props) => {
     return (
-        <Link className="project-card rounded overflow-hidden cursor-pointer transition group shadow hover:shadow-lg"
+        <Link className="project-card mx-8 my-4 rounded overflow-hidden cursor-pointer transition group shadow hover:shadow-lg"
             to={props.path}
         >
             <div className="img-wrapper flex items-center border-b border-gray-200 bg-blue-50">

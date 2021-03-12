@@ -81,11 +81,12 @@ const ObjectDetectionPage = () => {
         <div id="ObjectDetectionPage">
             <Section>
                 <h1 className="text-center mb-10">Object Detection</h1>
+                <h2 className="text-center text-bold text-tensorflow-color mb-10" >Localize and identify objects in a image/video</h2>
 
                 <div className="flex flex-col items-center">
-                    <h2 className="text-tensorflow-color mb-6">This demo needs a webcam</h2>
+                    <h3 className="mb-6">This demo needs a webcam</h3>
 
-                    <div className="relative mt-20">
+                    <div className="relative mt-12">
                         <Webcam 
                             ref={videoRef}
                             muted={true}
