@@ -1,72 +1,100 @@
-import React, { useState, useEffect } from 'react';
-import Section from '../../components/Section';
+import React, { useState, useEffect, useRef } from 'react';
 import "@tensorflow/tfjs";
 import * as cocossd from '@tensorflow-models/coco-ssd';
 import Loader from '../../components/Loader';
-import DropZone from '../../components/DropZone';
+import Section from '../../components/Section';
+import Webcam from 'react-webcam';
 
 
 const ObjectDetectionPage = () => {
-    // local state
+    // *********** START local state ***********
     const [loading, setLoading] = useState(false);
-    const [imgUrl, setImgUrl] = useState('https://i.pinimg.com/originals/e0/3d/5b/e03d5b812b2734826f76960eca5b5541.jpg');
-    const [dropFile, setDropFile] = useState<any>(null)
+    const [model, setModel] = useState<cocossd.ObjectDetection>();
+    const videoRef = useRef<any>(null);
+    const canvasRef = useRef<HTMLCanvasElement>(null);
+    // *********** END local state ***********
 
+
+    // *********** START functions ***********
     const loadModel = async () => {
         setLoading(true);
-        const image = document.getElementById('image') as HTMLImageElement;
-        const model = await cocossd.load();
+        const coco = await cocossd.load();
+        setModel(coco);
         setLoading(false);
-
-        // const predictions = await model.detect(image);
-        // console.log(predictions);
+    }
+    
+    const runModel = async () => {
+        if (model && canvasRef.current) {
+            const video = videoRef.current.video;
+            const predictions = await model.detect(video);
+            
+            // Draw canvas
+            if (predictions) {
+                const canvas = canvasRef.current;
+                const ctx = canvas.getContext('2d');
+                drawCanvas(predictions, ctx); 
+            }
+        }
     }
 
-    const onUrlInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setImgUrl(e.target.value);
-        setDropFile(null);
-    }
+    const drawCanvas = (predictions: cocossd.DetectedObject[], ctx: CanvasRenderingContext2D | null) => {
+        if (ctx) {
+            ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
-    const onDrop = (files: Array<any>) => {
-        setImgUrl('');
-        const file = {...files[0], preview: URL.createObjectURL(files[0])}
-        setDropFile(file);
+            predictions.map(obj => {
+                const text = obj['class']; 
+                const [x, y, width, height] = obj['bbox']; 
+    
+                ctx.beginPath();
+                ctx.strokeStyle = "#2fff00";
+                ctx.fillStyle = "#2fff00";
+                ctx.rect(x, y, width / 3, height);
+                ctx.fillText(text, x, y);
+                ctx.stroke();
+            })
+        }
     }
+    // *********** END functions **************
+    
 
-    useEffect(() => {
-        // loadModel();
+    
+    // *********** START useEffect **************
+    useEffect(() =>  {
+        loadModel();
     }, []);
 
-    const renderPreviewImg = () => {
-        let src = null;
-        if (dropFile) {
-            src = dropFile.preview;
-        } else if (imgUrl !== '') {
-            src = imgUrl;
-        }
-        return src ? <img id="image" src={src} width="400" /> : <></>;
-    }
+    useEffect(() =>  {
+        const intervalID = setInterval(() => {
+            runModel();
+        }, 1000);
+      
+        return () => {
+            clearInterval(intervalID);
+        };
 
+    }, [model]);
+    // *********** END useEffect **************
+
+
+    // *********** START renders **************
     return (
         <div id="ObjectDetectionPage">
             <Section>
                 <h1 className="text-center mb-10">Object Detection</h1>
 
-                <div className="grid grid-cols-2 gap-4">
-                    <div className="flex flex-col items-center">
-                        
-                        <h2 className="text-tensorflow-color mb-2">Paste image URL</h2>
-                        <input className="border border-gray-200 px-4 py-2 rounded w-3/4 mb-6" type="text" value={imgUrl} onChange={onUrlInput}
-                            placeholder="https://..."
+                <div className="flex flex-col items-center">
+                    <h2 className="text-tensorflow-color mb-6">This demo needs a webcam</h2>
+
+                    <div className="relative mt-20">
+                        <Webcam 
+                            ref={videoRef}
+                            muted={true}
                         />
 
-                        <h2 className="text-tensorflow-color mb-2">Or choose a file</h2>
-                        <div className="mb-6">
-                            <DropZone onDrop={onDrop}/>
-                        </div>
-
-                        {renderPreviewImg()}
-
+                        <canvas 
+                            ref={canvasRef}
+                            className="absolute top-0 w-full h-full"
+                        />
                     </div>
                 </div>
 

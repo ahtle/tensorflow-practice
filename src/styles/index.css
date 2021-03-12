@@ -21,6 +21,12 @@
     .text-tensorflow-color {
         color: #ff6f00;
     }
+    .border-tensorflow-color {
+        border-color: #ff6f00;
+    }
+    .bg-tensorflow-color {
+        background: #ff6f00;
+    }
 }
 
 .svg-inline--fa.fa-w-16 {

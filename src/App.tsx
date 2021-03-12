@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import MainHeader from './components/headers/MainHeader';
 import MainFooter from './components/footer/MainFooter';
 import Home from '../src/pages/Index';
-import ObjectDetectionPage from '../src/pages/object-detection/Index';
+import ObjectDetectionPage from './pages/object-detection/Index';
 import './styles/index.css';
 
 function App() {

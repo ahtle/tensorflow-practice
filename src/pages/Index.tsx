@@ -40,7 +40,7 @@ const Home = () => {
                                 <ProjectCard 
                                     key={p.name}
                                     name={p.name}
-                                    description={p.name}
+                                    description={p.description}
                                     image={p.image}
                                     path={p.path}
                                 />
