@@ -3,7 +3,6 @@ import ProjectCard from '../components/home/ProjectCard';
 
 
 const projects = [
-    {name: 'Image classification', description: `Upload images and I'll tell you what it is!`, path: '/image-classification', image: 'tf-image-classification-logo.png'},
     {name: 'Object detection', description: 'Are you really a "person"? Turn on your webcam and find out!', path: '/object-detection', image: 'tf-object-detection-logo.png'},
 ]
 
@@ -24,7 +23,7 @@ const Home = () => {
                         </div>
                         <div className="flex flex-col items-center mb-5 md:mb-0">
                             <h1 className="text-tensorflow-color text-bold mb-5">Tensorflow</h1>
-                            <p className="text-center">an end-to-end open source platform for machine learning</p>
+                            <p className="text-center">An end-to-end open source platform for machine learning</p>
                         </div>
                     </div>
                 </>
@@ -36,6 +35,18 @@ const Home = () => {
                     <h1 className="text-center mb-14">Mini projects:</h1>
                     <div className="flex justify-center">
                         
+                        <a className="project-card mx-8 my-4 rounded overflow-hidden cursor-pointer transition group shadow hover:shadow-lg"
+                            href="https://ahtle.github.io/tensorflow-image-classification/image-classification"
+                        >
+                            <div className="img-wrapper flex items-center border-b border-gray-200 bg-blue-50">
+                                <img src={`${process.env.PUBLIC_URL}/images/tf-image-classification-logo.png`} alt="Image classification"/>
+                            </div>
+                            <div className='card-body p-4 group-hover:bg-yellow-600 transition'>
+                                <p className="text-bold text-blue-900 text-lg mb-2 group-hover:text-white">Image classification</p>
+                                <p className="text-gray-400 group-hover:text-white transition">Upload images and I'll tell you what it is!</p>
+                            </div>
+                        </a>
+
                         {projects.map(p => {
                             return (
                                 <ProjectCard 
