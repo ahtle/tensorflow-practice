@@ -9,7 +9,7 @@ import './styles/index.css';
 function App() {
   return (
     <>
-      <Router>  
+      <Router basename={process.env.PUBLIC_URL}>  
         <MainHeader />
 
         <div className="min-h-screen">
