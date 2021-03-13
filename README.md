@@ -23,5 +23,8 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 npm install @tensorflow/tfjs
 npm i @tensorflow-models/coco-ssd
 
+docs for coco-ssd: 
+docs for image classification: https://github.com/tensorflow/tfjs-models/tree/master/mobilenet
+
 ## free image API 
 https://picsum.photos/200/300

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Section from '../../components/Section';
 import InputText from '../../components/InputText';
 import Button from '../../components/Button';
+// import * as mobilenet from '@tensorflow-models/mobilenet';
 
 const ImageClassificationPage = () => {
     const [urlString, setUrlString] = useState('https://media4.s-nbcnews.com/j/newscms/2016_36/1685951/ss-160826-twip-05_8cf6d4cb83758449fd400c7c3d71aa1f.fit-760w.jpg');
@@ -65,5 +66,21 @@ const ImageClassificationPage = () => {
 // or use an api to get a random image: https://picsum.photos/300
 // display image
 // run image classification and display result
+
+
+// Note: you do not need to import @tensorflow/tfjs here.
+
+// const mobilenet = require('@tensorflow-models/mobilenet');
+
+// const img = document.getElementById('img');
+
+// // Load the model.
+// const model = await mobilenet.load();
+
+// // Classify the image.
+// const predictions = await model.classify(img);
+
+// console.log('Predictions: ');
+// console.log(predictions);
 
 export default ImageClassificationPage;
