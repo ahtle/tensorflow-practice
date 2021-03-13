@@ -36,7 +36,7 @@ const Home = () => {
                     <div className="flex justify-center">
                         
                         <a className="project-card mx-8 my-4 rounded overflow-hidden cursor-pointer transition group shadow hover:shadow-lg"
-                            href="https://ahtle.github.io/tensorflow-image-classification/image-classification"
+                            href="https://ahtle.github.io/tensorflow-image-classification/#/image-classification"
                         >
                             <div className="img-wrapper flex items-center border-b border-gray-200 bg-blue-50">
                                 <img src={`${process.env.PUBLIC_URL}/images/tf-image-classification-logo.png`} alt="Image classification"/>
