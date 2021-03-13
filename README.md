@@ -1,10 +1,14 @@
-# Getting Started with Create React App
+Practice project to try out some of Tensorflow's model's
+[Go to Site](https://ahtle.github.io/tensorflow-practice)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Develop
 ### `yarn start`
-
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+## partner mini project
+[https://github.com/ahtle/tensorflow-image-classification](https://github.com/ahtle/tensorflow-image-classification)
+[Go to Site](https://ahtle.github.io/tensorflow-practice/images/tf-image-classification-logo.png)
 
 ## tensorflow
 npm install @tensorflow/tfjs
